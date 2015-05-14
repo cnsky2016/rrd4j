@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class SimpleTimeLabelFormatTest {
 
@@ -13,15 +14,17 @@ public class SimpleTimeLabelFormatTest {
 
     @Test
     public void strftime() throws Exception {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"), Locale.US);
+        calendar.setTime(INSTANT);
         TimeLabelFormat fmt = new SimpleTimeLabelFormat("%Y-%m-%dT%H:%M:%S");
-        Assert.assertEquals("2015-04-08T20:29:20", fmt.format(calendar, Locale.US, INSTANT));
+        Assert.assertEquals("2015-04-09T03:29:20", fmt.format(calendar, Locale.US));
     }
 
     @Test
     public void simpleDateFormat() throws Exception {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"), Locale.US);
+        calendar.setTime(INSTANT);
         TimeLabelFormat fmt = new SimpleTimeLabelFormat("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
-        Assert.assertEquals("2015-04-08T20:29:20", fmt.format(calendar, Locale.US, INSTANT));
+        Assert.assertEquals("2015-04-09T03:29:20", fmt.format(calendar, Locale.US));
     }
 }

@@ -2,7 +2,6 @@ package org.rrd4j.graph;
 
 import java.awt.Font;
 import java.awt.Paint;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -85,7 +84,7 @@ class TimeAxis implements RrdGraphConstants {
         adjustStartingTime(tickSetting.labelUnit, tickSetting.labelUnitCount);
         int y = rrdGraph.im.yorigin + (int) rrdGraph.worker.getFontHeight(font) + 2;
         for (int status = getTimeShift(); status <= 0; status = getTimeShift()) {
-            String label = tickSetting.format.format(calendar, rrdGraph.gdef.locale, calendar.getTime());
+            String label = tickSetting.format.format(calendar, rrdGraph.gdef.locale);
             long time = calendar.getTime().getTime() / 1000L;
             int x1 = rrdGraph.mapper.xtr(time);
             int x2 = rrdGraph.mapper.xtr(time + tickSetting.labelSpan);
@@ -176,7 +175,6 @@ class TimeAxis implements RrdGraphConstants {
             break;
         }
     }
-
 
     private void chooseTickSettings() {
         if (rrdGraph.gdef.timeAxisSetting != null) {

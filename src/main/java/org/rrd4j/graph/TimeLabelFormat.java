@@ -1,7 +1,6 @@
 package org.rrd4j.graph;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -17,5 +16,5 @@ public interface TimeLabelFormat {
      * @param timestamp  instant to format
      * @return           formatted string for the timestamp
      */
-    String format(Calendar calendar, Locale locale, Date timestamp);
+    String format(Calendar calendar, Locale locale);
 }

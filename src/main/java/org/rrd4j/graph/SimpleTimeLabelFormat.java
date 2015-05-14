@@ -1,9 +1,8 @@
 package org.rrd4j.graph;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Simple time label using a format similar to {@code strftime}. For more details on the
@@ -26,20 +25,17 @@ public class SimpleTimeLabelFormat implements TimeLabelFormat {
     public SimpleTimeLabelFormat(String format) {
         // escape strftime like format string
         this.format = format.replaceAll("%([^%])", "%1\\$t$1");
-        System.err.println(this.format);
     }
 
     @Override
-    public String format(Calendar calendar, Locale locale, Date timestamp) {
-        Calendar c = (Calendar) calendar.clone();
-        c.setTime(timestamp);
+    public String format(Calendar calendar, Locale locale) {
         if (format.contains("%")) {
             // strftime like format string
-            return String.format(locale, format, c);
+            return String.format(locale, format, calendar);
         } else {
             SimpleDateFormat sdf = new SimpleDateFormat(format);
-            sdf.setCalendar(c);
-            return sdf.format(timestamp);
+            sdf.setCalendar(calendar);
+            return sdf.format(calendar.getTime());
         }
     }
 }
